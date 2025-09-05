@@ -91,13 +91,13 @@ class StorageUploader {
 }
 
 class VM {
-    constructor(name: string) {
+    constructor(private name: string) {
         console.log(`VM ${name} created`);
     }
 
     createSnapshot() {
         exec(`
-           virsh -c qemu:///session snapshot-create-as "MyVM" "$(date +%Y-%m-%d_%H-%M-%S)" \
+           virsh -c qemu:///session snapshot-create-as ${this.name} "$(date +%Y-%m-%d_%H-%M-%S)" \
   --description "Snapshot taken on $(date)"
             `,
             (error, stdout, stderr) => {
@@ -111,6 +111,12 @@ class VM {
                 }
 
             });
+
+            // new FileUpload(`/home/user/.local/share/libvirt/qemu/${this.name}.qcow2`).execute().then(() => {
+            //     console.log(`Snapshot for VM ${this.name} uploaded successfully`);
+            // }).catch(err => {
+            //     console.error(`Error uploading snapshot for VM ${this.name}: ${err}`);
+            // });
 
     }
 }
