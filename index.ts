@@ -96,6 +96,7 @@ class VM {
     }
 
     createSnapshot() {
+        console.log(`Creating snapshot for VM ${this.name}`);
         exec(`
            virsh -c qemu:///session snapshot-create-as ${this.name} "$(date +%Y-%m-%d_%H-%M-%S)" \
   --description "Snapshot taken on $(date)"
