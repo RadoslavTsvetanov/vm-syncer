@@ -61,6 +61,7 @@ class FileUpload implements AsyncExecutable {
     }
 
     async uploadToRemote() {
+// needs error handling 
         await this.s3.send(new PutObjectCommand({ Bucket: this.bucket, Key: this.filePath, Body: createReadStream(this.filePath) }));
     }
 
@@ -140,6 +141,24 @@ private vms: VM[] = []
     }
 }
 
+class InternetWatcher{
+
+isConnectedToInternet(){
+try{
+fetch()
+}catch()
+
+}
+
+
+watch(){
+if(!this.isConnectedToInternet()){
+...
+
+}
+
+}
+}
 
 
 new Manager().watch()
