@@ -10,6 +10,17 @@ import { createHash } from "crypto";
 import { exec } from "child_process";
 
 
+
+function Retrier(thingToRetry: async () => Promise<void>, stopIf: async() => Promise<void>) {
+
+while True {
+if(stopIf()) break;
+thingToRetry();
+
+}
+
+}
+
 interface AsyncExecutable {
     execute(): Promise<void>
 }
